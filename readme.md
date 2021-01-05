@@ -116,3 +116,59 @@ serverName = null;
     an input event neither use an $event to get event data.
 
 ---
+
+# Directives
+
+Directives are instructions in the DOM.
+
+## using ngIf to output data conditionally
+
+```ts
+  serverCreated: boolean = false;
+  onServerChange(){
+    this.serverCreated = true;
+  }
+
+```
+
+```html
+<p *ngIf="serverCreated">
+  server is created, name is {{serverName}} with address {{serverAddress}}
+</p>
+```
+
+- Show paragraph element when serverCreated turns to true.
+
+## Styling element with ngStyle directive
+
+```html
+<p [ngStyle]="{backgroundColor: checkServerStatus()}">
+  server {{serverId}} is {{serverStatus}} now!
+</p>
+```
+
+```ts
+  checkServerStatus(){
+    return this.serverStatus === 'Online' ? 'red': 'yellow'
+  }
+```
+
+here v bind css style to ngStyle directive. and based on server Status, background color of p element updates.
+
+## Outputtin list using ngFor
+
+```html
+<ul *ngFor="let item of serverArr">
+  <li>{{item}}</li>
+</ul>
+```
+
+```ts
+serverArr = ['server1', 'server2', 'server3'];
+```
+
+---
+
+# Components and DataBinding
+
+## Splitting App into components
