@@ -1,0 +1,8 @@
+<div class="container">
+    <form>
+        <label for="username">UserName: </label>
+        <input matInput name="username" id="username" [(ngModel)]="userName">
+        <p>{{userName}}</p>
+        <button mat-raised-button color="primary" [disabled]=!userName (click)=onSubmit()>Check</button>
+    </form>
+</div>
