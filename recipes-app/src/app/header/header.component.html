@@ -8,10 +8,10 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Recipe</a>
+                    <a (click)="onSelect('recipe')" class="nav-link active" aria-current="page" href="#">Recipe</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Shopping List</a>
+                    <a (click)="onSelect('shopping-list')" class="nav-link" href="#">Shopping List</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"

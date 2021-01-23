@@ -247,3 +247,10 @@ export class Ingredients {
 ```
 
 ---
+
+## Adding navigation with event binding and ngif
+
+On clicking nav bars, need to show different components. 
+
+**Example:** Recipee and Shopping List navs - shows their respective component while clicking.
+
