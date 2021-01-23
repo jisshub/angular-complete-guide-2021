@@ -200,4 +200,87 @@ Parent component is _app component_.
 
 ---
 
-## Assigning an Alias to Custom Properties
+## Binding to Custom Events
+
+Bind custom events to app-cockpit component.
+
+**app.component.html**
+
+```html
+<app-cockpit
+  (serverCreated)="onServerAdded($event)"
+  (blueprintCreated)="onBlueprintAdded($event)"
+>
+</app-cockpit>
+```
+
+**app.component.ts**
+
+```ts
+onServerAdded(serverData: {serverName: string, serverContent: string}){
+    this.serverElements.push({
+      type: 'server',
+      name: serverData.serverName,
+      content: serverData.serverContent
+    })
+  }
+  onBlueprintAdded(blueprintData: {serverName: string, serverContent: string}){
+    this.serverElements.push({
+      type: 'server',
+      name: blueprintData.serverName,
+      content: blueprintData.serverContent
+  });
+  }
+```
+
+Next v create two **EventEmitter** objects in app cockpit component.
+
+**EventEmitter** is an object that allows to emit events.
+
+**cockpit.component.ts**
+
+```ts
+export class CockpitComponent implements OnInit {
+  serverCreated = new EventEmitter<{
+    serverName: string;
+    serverContent: string;
+  }>();
+  blueprintCreated = new EventEmitter<{
+    serverName: string;
+    serverContent: string;
+  }>();
+}
+```
+
+Next v can emit the custom events _serverCreated_ and _blueprintCreated_.
+
+**cockpit.component.ts**
+
+```ts
+onAddServer() {
+    this.serverCreated.emit({serverName: "jjfgd", serverContent: "dasdasd"})
+  }
+
+  onAddBlueprint() {
+    this.blueprintCreated.emit({serverName: "kjhk", serverContent: "rtyrt"})
+  }
+```
+
+Next v have to make this events listenable from outside the **cockpit component**. To do that v attach **@Ouput()** decorator before both events. Then this events are listenable to **App component**. Thus components can commuunicate each other.
+
+**cockpit.component.ts**
+
+```ts
+export class CockpitComponent implements OnInit {
+  @Output() serverCreated = new EventEmitter<{
+    serverName: string;
+    serverContent: string;
+  }>();
+  @Output() blueprintCreated = new EventEmitter<{
+    serverName: string;
+    serverContent: string;
+  }>();
+}
+```
+
+---
