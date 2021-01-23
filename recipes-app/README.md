@@ -250,7 +250,25 @@ export class Ingredients {
 
 ## Adding navigation with event binding and ngif
 
-On clicking nav bars, need to show different components. 
+On clicking nav bars, need to show different components.
 
-**Example:** Recipee and Shopping List navs - shows their respective component while clicking.
+**Example:** Recipee and Shopping List navs - shows their respective component while clicking. We have to add click events to each nav of header component template.
 
+**header.componet.html**
+
+```html
+<li class="nav-item">
+  <a
+    (click)="onSelect('recipe')"
+    class="nav-link active"
+    aria-current="page"
+    href="#"
+    >Recipe</a
+  >
+</li>
+<li class="nav-item">
+  <a (click)="onSelect('shopping-list')" class="nav-link" href="#"
+    >Shopping List</a
+  >
+</li>
+```
