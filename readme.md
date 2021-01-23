@@ -171,4 +171,33 @@ serverArr = ['server1', 'server2', 'server3'];
 
 # Components and DataBinding
 
-## Splitting App into components
+## Binding to Custom properties
+
+### Input Decorator
+
+Binding a custom property of child component to parent component using **@Input()** decorator.
+
+**Example:**
+
+Child Component is _server-element component_.
+
+**server-element.component.ts**
+
+```ts
+@Input() element: {type: string, name: string, content: string};
+```
+
+Parent component is _app component_.
+
+**app.component.html**
+
+```html
+<app-server-element
+  *ngFor="let serverElement of serverElements"
+  [element]="serverElement"
+></app-server-element>
+```
+
+---
+
+## Assigning an Alias to Custom Properties
