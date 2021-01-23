@@ -266,7 +266,7 @@ onAddServer() {
   }
 ```
 
-Next v have to make this events listenable from outside the **cockpit component**. To do that v attach **@Ouput()** decorator before both events. Then this events are listenable to **App component**. Thus components can commuunicate each other.
+Next v have to make this events listenable from outside the **cockpit component**. To do that v attach **@Ouput()** decorator before both events. Then this events are listenable to **App component**. Thus components can communicate each other.
 
 **cockpit.component.ts**
 
@@ -280,6 +280,52 @@ export class CockpitComponent implements OnInit {
     serverName: string;
     serverContent: string;
   }>();
+}
+```
+
+---
+
+## Using Local Reference in Template
+
+A **Local Reference** can be placed with any html element in the template.
+
+This local reference we set hold as a reference to that html element not just to the value v enter.
+
+We can use this local reference anywhere in the template, but not in typescript code.
+
+**cockpit.component.html**
+
+```html
+<input type="text" class="form-control" #newServerName />
+<button class="btn btn-primary" (click)="onAddServer(newServerName)">
+  Add Server
+</button>
+```
+
+_newServerName_ is the local reference set to the input element.
+
+Pass that reference as an arg to **onAddServer()** function.
+
+**cockpit.component.ts**
+
+```ts
+  onAddServer(name: string) {
+    console.log(name);
+    this.serverCreated.emit({serverName: "jjfgd", serverContent: "dasdasd"})
+  }
+```
+
+On Component file, v get that argument passed to a parameter called name.
+
+**Note**: This local reference refers the element v set into.
+
+To get the value of that element, use _value_ property on it.
+
+**cockpit.component.ts**
+
+```ts
+onAddServer(name: HTMLInputElement) {
+  console.log(name.value);
 }
 ```
 
