@@ -1,0 +1,7 @@
+<app-cockpit 
+    (movieCreated)="onMovieCreated($event)"
+    (movieCopy)="onMovieCopied($event)">
+</app-cockpit>
+<app-movie-element *ngFor="let eachMovie of movieElement" [movie]="eachMovie"></app-movie-element>
+
+
