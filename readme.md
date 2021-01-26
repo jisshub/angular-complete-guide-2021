@@ -330,3 +330,33 @@ onAddServer(name: HTMLInputElement) {
 ```
 
 ---
+
+## Getting Access to Template & DOM with @ViewChild
+
+First v have to set a local reference to the element.
+
+**cockpit.component.html**
+
+```html
+<input type="text" class="form-control" #serverContentInput />
+```
+
+**cockpit.component.ts**
+
+```ts
+@ViewChild('serverContentInput', {static: true}) serverContentInput: ElementRef;
+
+onAddServer(name: HTMLInputElement) {
+  this.serverCreated.emit({serverName: name.value, serverContent: this.serverContentInput.nativeElement.value})
+}
+```
+
+Argument v pass to **@ViewChild** is the selector of the element.
+
+**@ViewChild** is of type **ElementRef**.
+
+To get access to the value of element, v use _nativeElement.value_ property.
+
+Thus v get access to the underlying element and it's value by setting a **local reference** and **@ViewChild**
+
+---
