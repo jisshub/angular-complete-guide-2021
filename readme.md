@@ -360,3 +360,76 @@ To get access to the value of element, v use _nativeElement.value_ property.
 Thus v get access to the underlying element and it's value by setting a **local reference** and **@ViewChild**
 
 ---
+
+# Data Binding Assignment
+
+![](./screenshot/problem-3.jpg)
+
+Create 3 components at first.
+
+In _game-control.component.html_ file
+
+add two buttons,
+
+```html
+<div class="btn">
+  <button mat-raised-button color="primary" (click)="onStartGame()">
+    Start
+  </button>
+  <button mat-raised-button color="accent" (click)="onStopGame()">Stop</button>
+</div>
+```
+
+Next, render _app-game-contol component_ in _app component.html_.
+
+```html
+<app-game-controls></app-game-controls>
+```
+
+When v start, v emit an event. so bind a click listener to _game-control component template_ to start game.
+
+```html
+<button mat-raised-button color="primary" (click)="onStartGame()">Start</button>
+```
+
+v define this function in _game-controls-component_.
+create an event to be emitted on clicking button. so v add an EventEmitter. here v emit an incrementing number on click.
+
+```ts
+export class GameControlsComponent implements OnInit {
+  intervalFired = new EventEmitter<number>();
+  interval: any;
+  firstNumber: number = 0;
+
+  onStartGame(){
+    this.interval= setInterval(() => {
+      this.intervalFired.emit(this.firstNumber + 1); // emit an incrementing number
+      this.firstNumber ++;
+    })
+  }
+```
+
+Next v have to make this listenable from outside
+the component.
+
+So first add **@Ouput()** to EventEmitter.
+
+gamr-controls.component.ts
+
+```ts
+  @Output() intervalFired = new EventEmitter<number>();
+```
+
+Later bind custom event to _App Component_
+
+```html
+<app-game-controls (intervalFired)="onGameStarted($event)"></app-game-controls>
+```
+
+Later define the function assigned to that event and print the emitted value.
+
+```ts
+onGameStarted(value: number){
+    console.log(value);
+  }
+```

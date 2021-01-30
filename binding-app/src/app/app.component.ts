@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'binding-app';
+  onGameStarted(value: number){
+    console.log(value);
+  }
 }
